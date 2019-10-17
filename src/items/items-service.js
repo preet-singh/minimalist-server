@@ -14,10 +14,10 @@ const ItemsService = {
       });
   },
   getById(knex, id) {
-    return knex.select('*').from('minimalist_item').where('id', id).first();
+    return knex.select('*').from('minimalist_items').where('id', id).first();
   },
   deleteItem(knex, id){
-    return knex.select('*').from('minimalist_item').where('id', id).delete();
+    return knex.select('*').from('minimalist_items').where('id', id).delete();
   },
   updateItem(knex, id, newItemFields) {
     return knex('minimalist_item')

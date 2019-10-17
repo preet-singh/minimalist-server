@@ -25,8 +25,8 @@ inventoryRouter
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    const { inventory_name } = req.body;
-    const newInventory = { inventory_name };
+    const { inventory_name, user_id } = req.body;
+    const newInventory = { inventory_name, user_id };
   
     for (const [key, value] of Object.entries(newInventory)) {
       if (value === null) {
@@ -58,7 +58,7 @@ inventoryRouter
       .then(inventory => {
         if (!inventory) {
           return res.status(404).json({
-            error: { message: 'Inventory doesn\'t exist' }
+            error: { message: `Inventory doesn't exist` }
           });
         }
         res.inventory = inventory;
@@ -80,13 +80,18 @@ inventoryRouter
       .catch(next);
   })
   .patch(jsonParser, (req, res, next) => {
-    const { inventory_name } = req.body;
-    const inventoryToUpdate = { inventory_name };
+    const { inventory_name, user_id } = req.body;
+    const inventoryToUpdate = { inventory_name, user_id };
     //const numberOfValues = Object.values(inventoryToUpdate).filter(Boolean).length;
     //if(numberOfValues === 0){
     if(!inventory_name){
       return res.status(400).json({
-        error: { message: 'Request body must contain a \'inventory_name\''}
+        error: { message: `Request body must contain an inventory_name`}
+      });
+    }
+    if(!user_id){
+      return res.status(400).jsin({
+        error: { message: `Request body must contain a user_id`}
       });
     }
   

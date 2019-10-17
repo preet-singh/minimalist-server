@@ -1,10 +1,10 @@
 BEGIN;
 
--- TRUNCATE
---     minimalist_users,
---     minimalist_inventory,
---     minimalist_items
--- RESTART IDENTITY CASCADE;
+TRUNCATE
+    minimalist_users,
+    minimalist_inventory,
+    minimalist_items
+RESTART IDENTITY CASCADE;
 
 INSERT INTO minimalist_users (user_name, full_name, nickname, password)
 VALUES
