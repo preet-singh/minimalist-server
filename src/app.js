@@ -11,7 +11,7 @@ const errorHandler = require('./bin/error-handler');
 const inventoryRouter = require('../src/inventory /inventory-router');
 const itemsRouter = require('../src/items/items-router');
 const authRouter = require('../src/auth/auth-router');
-//const usersRouter = require('../src/users/users-router');
+const usersRouter = require('../src/users/users-router');
 
 
 //INITIALIZATION
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 app.use('/api/inventory', inventoryRouter);
 app.use('/api/items', itemsRouter);
 app.use('/api/login', authRouter);
-//app.use('/api/users', usersRouter);
+app.use('/api/users', usersRouter);
 
 //ERROR HANDLING
 app.use((req, res, next) => {

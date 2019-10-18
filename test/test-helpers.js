@@ -178,27 +178,27 @@ function makeInventoryFixtures() {
   return { testUsers, testInventory, testItems }
 }
 
-// function cleanTables(db) {
-//   return db.transaction(trx => 
-//     trx.raw(
-//       `TRUNCATE
-//         minimalist_users,
-//         minimalist_inventory,
-//         minimalist_items
-//       `
-//     )
-//     .then(() =>
-//       Promise.all([
-//         trx.raw(`ALTER SEQUENCE minimalist_inventory_id_seq minvalue 0 START WITH 1`),
-//         trx.raw(`ALTER SEQUENCE minimalist_users_id_seq minvalue 0 START WITH 1`),
-//         trx.raw(`ALTER SEQUENCE minimalist_items_id_seq minvalue 0 START WITH 1`),
-//         trx.raw(`SELECT setval('minimalist_inventory_id_seq', 0)`),
-//         trx.raw(`SELECT setval('minimalist_users_id_seq', 0)`),
-//         trx.raw(`SELECT setval('minimalist_items_id_seq', 0)`),
-//       ])
-//     )
-//   )
-// }
+function cleanTables(db) {
+  return db.transaction(trx => 
+    trx.raw(
+      `TRUNCATE
+        minimalist_users,
+        minimalist_inventory,
+        minimalist_items
+      `
+    )
+    .then(() =>
+      Promise.all([
+        trx.raw(`ALTER SEQUENCE minimalist_inventory_id_seq minvalue 0 START WITH 1`),
+        trx.raw(`ALTER SEQUENCE minimalist_users_id_seq minvalue 0 START WITH 1`),
+        trx.raw(`ALTER SEQUENCE minimalist_items_id_seq minvalue 0 START WITH 1`),
+        trx.raw(`SELECT setval('minimalist_inventory_id_seq', 0)`),
+        trx.raw(`SELECT setval('minimalist_users_id_seq', 0)`),
+        trx.raw(`SELECT setval('minimalist_items_id_seq', 0)`),
+      ])
+    )
+  )
+}
 
 function seedUsers(db, users) {
   const preppedUsers = users.map(user => ({
@@ -245,13 +245,13 @@ function seedMaliciousInventory(db, user, inventory) {
     )
 }
 
-// function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
-//   const token = jwt.sign({ user_id: user.id }, secret, {
-//     subject: user.user_name,
-//     algorithm: 'HS256',
-//   })
-//   return `Bearer ${token}`
-// }
+function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
+  const token = jwt.sign({ user_id: user.id }, secret, {
+    subject: user.user_name,
+    algorithm: 'HS256',
+  })
+  return `Bearer ${token}`
+}
 
 module.exports = {
   makeUsersArray,
@@ -262,9 +262,9 @@ module.exports = {
   makeItemsArray,
   
   makeInventoryFixtures,
-  //cleanTables,
+  cleanTables,
   seedInventoryTables,
   seedMaliciousInventory,
-  //makeAuthHeader,
+  makeAuthHeader,
   seedUsers,
 }

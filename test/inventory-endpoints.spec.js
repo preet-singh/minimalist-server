@@ -21,8 +21,8 @@ describe('Inventory Endpoints', function() {
   });
 
   after('disconnect from db', () => db.destroy());
-  before('cleanup', () => db('minimalist_inventory').truncate());//helpers.cleanTables(db));
-  afterEach('cleanup', () => db('minimalist_inventory').truncate());//helpers.cleanTables(db));
+  before('cleanup', () => helpers.cleanTables(db));
+  afterEach('cleanup', () => helpers.cleanTables(db));
 
   describe('GET /api/inventory', () => {
     context('Given no inventory', () => {

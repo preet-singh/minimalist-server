@@ -3,5 +3,5 @@ CREATE TABLE minimalist_users (
     user_name TEXT NOT NULL,
     full_name TEXT NOT NULL,
     nickname TEXT,
-    password VARCHAR(30) NOT NULL 
+    password TEXT NOT NULL 
 );
