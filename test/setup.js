@@ -6,8 +6,8 @@ process.env.JWT_EXPIRY = '3m';
 
 require('dotenv').config();
 
-process.env.TEST_DB_URL = process.env.TEST_DB_URL
-  || 'postgresql://-------@localhost/minimalist-server';
+process.env.TEST_DATABASE_URL = process.env.TEST_DATABASE_URL
+  || 'postgresql://dunder_mifflin@localhost/minimalist_test';
 
 const { expect } = require('chai');
 const supertest = require('supertest');

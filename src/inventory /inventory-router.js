@@ -20,6 +20,7 @@ inventoryRouter
       req.app.get('db')
     )
       .then(inventory => {
+        console.log(inventory);
         res.json(inventory);
       })
       .catch(next);
@@ -58,7 +59,7 @@ inventoryRouter
       .then(inventory => {
         if (!inventory) {
           return res.status(404).json({
-            error: { message: `Inventory doesn't exist` }
+            error: { message: 'Inventory doesn\'t exist' }
           });
         }
         res.inventory = inventory;
@@ -86,12 +87,12 @@ inventoryRouter
     //if(numberOfValues === 0){
     if(!inventory_name){
       return res.status(400).json({
-        error: { message: `Request body must contain an inventory_name`}
+        error: { message: 'Request body must contain an inventory_name'}
       });
     }
     if(!user_id){
-      return res.status(400).jsin({
-        error: { message: `Request body must contain a user_id`}
+      return res.status(400).json({
+        error: { message: 'Request body must contain a user_id'}
       });
     }
   
