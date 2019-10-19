@@ -10,7 +10,6 @@ function makeUsersArray() {
       full_name: 'Test user 1',
       nickname: 'TU1',
       password: 'password',
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
       id: 2,
@@ -18,7 +17,6 @@ function makeUsersArray() {
       full_name: 'Test user 2',
       nickname: 'TU2',
       password: 'password',
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
       id: 3,
@@ -26,7 +24,6 @@ function makeUsersArray() {
       full_name: 'Test user 3',
       nickname: 'TU3',
       password: 'password',
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
       id: 4,
@@ -34,7 +31,6 @@ function makeUsersArray() {
       full_name: 'Test user 4',
       nickname: 'TU4',
       password: 'password',
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
   ]
 }
@@ -45,25 +41,22 @@ function makeInventoryArray(users) {
       id: 1,
       inventory_name: 'First test inven!',
       user_id: users[0].id,
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
       id: 2,
       inventory_name: 'Second test inven!',
       user_id: users[1].id,
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
       id: 3,
       inventory_name: 'Third test inven!',
       user_id: users[2].id,
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
       id: 4,
       inventory_name: 'Fourth test inven!',
       user_id: users[3].id,
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
+
     },
   ]
 }
@@ -76,7 +69,6 @@ function makeItemsArray(users, inventory) {
       item_description: 'First item desc',
       item_action: 'First item action',
       inventory_id: inventory[0].id,
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
       id: 2,
@@ -84,7 +76,6 @@ function makeItemsArray(users, inventory) {
       item_description: 'First item desc',
       item_action: 'First item action',
       inventory_id: inventory[0].id,
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
       id: 3,
@@ -92,7 +83,6 @@ function makeItemsArray(users, inventory) {
       item_description: 'First item desc',
       item_action: 'First item action',
       inventory_id: inventory[0].id,
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
       id: 4,
@@ -100,7 +90,6 @@ function makeItemsArray(users, inventory) {
       item_description: 'First item desc',
       item_action: 'First item action',
       inventory_id: inventory[0].id,
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
     {
       id: 5,
@@ -108,7 +97,6 @@ function makeItemsArray(users, inventory) {
       item_description: 'First item desc',
       item_action: 'First item action',
       inventory_id: inventory[0].id,
-      //date_created: new Date('2029-01-22T16:28:32.615Z'),
     },
   ];
 }
@@ -120,19 +108,21 @@ function makeExpectedInventory(users, inventory, items=[]) {
   const number_of_items = items
     .filter(item => item.inventory_id === item.id)
     .length
-
-  return {
+  
+  const data = {
     id: inventory.id,
     inventory_name: inventory.inventory_name,
     user_id: inventory.user_id,
-    number_of_items,
-    // author: {
-    //   id: author.id,
-    //   user_name: author.user_name,
-    //   full_name: author.full_name,
-    //   nickname: author.nickname,
-    // },
   }
+  //console.log('EXPECTED INVEN');
+  //console.log(inventory);
+  return data;
+  // return {
+  //   id: inventory.id,
+  //   inventory_name: inventory.inventory_name,
+  //   user_id: inventory.user_id,
+     //number_of_items
+   //}
 }
 
 function makeExpectedInventoryItems(users, inventoryId, items) {
@@ -160,10 +150,12 @@ function makeMaliciousInventory(user) {
   const maliciousInventory = {
     id: 911,
     inventory_name: `Naughty naughty very naughty <script>alert("xss");</script> Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
+    user_id: user.id
   }
   const expectedInventory = {
     ...makeExpectedInventory([user], maliciousInventory),
     inventory_name: `Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt; Bad image <img src="https://url.to.file.which/does-not.exist">. But not <strong>all</strong> bad.`,
+    user_id: user.id
   }
   return {
     maliciousInventory,

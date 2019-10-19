@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 });
 app.use('/api/inventory', inventoryRouter);
 app.use('/api/items', itemsRouter);
-app.use('/api/login', authRouter);
+app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 
 //ERROR HANDLING

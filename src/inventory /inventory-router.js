@@ -10,7 +10,8 @@ const jsonParser = express.json();
 
 const serializeInventory = inventory => ({
   id: inventory.id,
-  inventory_name: xss(inventory.inventory_name)
+  inventory_name: xss(inventory.inventory_name),
+  user_id: inventory.user_id,
 });
 
 inventoryRouter

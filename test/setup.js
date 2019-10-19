@@ -1,7 +1,7 @@
 'use strict';
 process.env.NODE_ENV = 'test';
 process.env.TZ = 'UTC';
-process.env.JWT_SECRET = 'test-jwt-secret';
+process.env.JWT_SECRET = 'secret';
 
 
 require('dotenv').config();

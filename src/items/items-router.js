@@ -34,7 +34,7 @@ itemsRouter
     for (const [key, value] of Object.entries(newItem)) {
       if (!value) {
         return res.status(400).json({
-          error: { message: `Missing '${key}' in request body` }
+          error: `Missing '${key}' in request body` 
         });
       }
     }
@@ -61,7 +61,7 @@ itemsRouter
       .then(item => {
         if (!item) {
           return res.status(404).json({
-            error: { message: `Item doesn't exist` }
+            error: `Item doesn't exist` 
           });
         }
         res.item = item;
