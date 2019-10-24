@@ -14,22 +14,24 @@ const serializeInventory = inventory => ({
   user_id: inventory.user_id,
 });
 
+// const serializeInventoryItem = item => ({
+//   id: item.id,
+//   item_name: xss(item.item_name),
+//   item_description: xss(item.item_description),
+//   item_action: xss(item.item_action),
+//   inventory_id: item.inventory_id
+// });
+
 inventoryRouter
   .route('/')
   .get((req, res, next) => {
-    InventoryService.getAllInventory(
-      req.app.get('db')
-    )
-      .then(inventory => {
-        console.log(inventory);
-        res.json(inventory);
-      })
+    InventoryService.getAllInventory(req.app.get('db'))
+      .then(inventory => res.json(inventory.map(serializeInventory)))
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
     const { inventory_name, user_id } = req.body;
     const newInventory = { inventory_name, user_id };
-  
     for (const [key, value] of Object.entries(newInventory)) {
       if (value === null) {
         return res.status(400).json({
@@ -51,11 +53,11 @@ inventoryRouter
   });
   
 inventoryRouter
-  .route('/:inventory_id')
+  .route('/:id')
   .all((req, res, next) => {
     InventoryService.getById(
       req.app.get('db'), 
-      req.params.inventory_id
+      req.params.id
     )
       .then(inventory => {
         if (!inventory) {
@@ -74,7 +76,7 @@ inventoryRouter
   .delete((req, res, next) => {
     InventoryService.deleteInventory(
       req.app.get('db'),
-      req.params.inventory_id
+      req.params.id
     )
       .then(() => {
         res.status(204).end();
@@ -83,7 +85,7 @@ inventoryRouter
   })
   .patch(jsonParser, (req, res, next) => {
     const { inventory_name, user_id } = req.body;
-    const inventoryToUpdate = { inventory_name, user_id };
+    const newInventoryFields = { inventory_name, user_id };
     //const numberOfValues = Object.values(inventoryToUpdate).filter(Boolean).length;
     //if(numberOfValues === 0){
     if(!inventory_name){
@@ -99,13 +101,26 @@ inventoryRouter
   
     InventoryService.updateInventory(
       req.app.get('db'),
-      req.params.inventory_id,
-      inventoryToUpdate
+      req.params.id,
+      newInventoryFields
     )
-      .then(numRowsAffected => {
-        res.status(204).end();
-      })
+      .then( () => res.status(204).end())
       .catch(next);
   });
+
+// inventoryRouter
+//   .route('/:inventoryId/items')
+//   .get((req, res, next) => {
+//     InventoryService.getItemsForInventory(
+//       req.app.get('db'),
+//       req.params.inventory_id
+//     )
+//       .then(items => {
+//         res
+//           .status(201)
+//           .json(items.map(serializeInventoryItem));
+//       })
+//       .catch(next);
+//   });
   
 module.exports = inventoryRouter;

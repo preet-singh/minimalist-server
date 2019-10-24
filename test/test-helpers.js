@@ -154,8 +154,8 @@ function makeMaliciousInventory(user) {
   }
   const expectedInventory = {
     ...makeExpectedInventory([user], maliciousInventory),
-    inventory_name: `Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt; Bad image <img src="https://url.to.file.which/does-not.exist">. But not <strong>all</strong> bad.`,
-    user_id: user.id
+    inventory_name: `Naughty naughty very naughty <script>alert("xss");</script> Bad image <img src="https://url.to.file.which/does-not.exist" onerror="alert(document.cookie);">. But not <strong>all</strong> bad.`,
+    //user_id: user.id
   }
   return {
     maliciousInventory,

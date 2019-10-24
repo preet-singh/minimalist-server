@@ -157,43 +157,4 @@ describe('Inventory Endpoints', function() {
       });
     });
   });
-
-  // describe('GET /api/inventory/:inventory_id/items', () => {
-  //   context('Given no inventory', () => {
-  //     beforeEach(() =>
-  //       helpers.seedUsers(db, testUsers)
-  //     );
-
-  //     it('responds with 404', () => {
-  //       const inventoryId = 123456;
-  //       return supertest(app)
-  //         .get(`/api/inventory/${inventoryId}/items`)
-  //         .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-  //         .expect(404, { error: 'Inventory doesn\'t exist' });
-  //     });
-  //   });
-
-  //   context('Given there are items for inventory in the database', () => {
-  //     beforeEach('insert inventory', () =>
-  //       helpers.seedInventoryTables(
-  //         db,
-  //         testUsers,
-  //         testInventory,
-  //         testItems
-  //       )
-  //     );
-
-  //     it('responds with 200 and the specified items', () => {
-  //       const inventoryId = 1;
-  //       const expectedItems = helpers.makeExpectedInventoryItems(
-  //         testUsers, inventoryId, testItems
-  //       );
-
-  //       return supertest(app)
-  //         .get(`/api/inventory/${inventoryId}/items`)
-  //         .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-  //         .expect(200, expectedItems);
-  //     });
-  //   });
-  // });
 });

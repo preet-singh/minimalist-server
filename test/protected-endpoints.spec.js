@@ -41,11 +41,7 @@
 //       path: '/api/inventory/1',
 //       method: supertest(app).get,
 //     },
-//     // {
-//     //   name: 'GET /api/inventory/:inventory_id/items',
-//     //   path: '/api/articles/1/comments',
-//     //   method: supertest(app).get,
-//     // },
+
 //     {
 //       name: 'POST /api/items',
 //       path: '/api/items',
