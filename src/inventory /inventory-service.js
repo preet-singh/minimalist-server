@@ -21,16 +21,9 @@ const InventoryService = {
   },
   updateInventory(knex, id, newInventoryFields) {
     return knex('minimalist_inventory')
-      .where({ id })
+      .where('id', id )
       .update(newInventoryFields);
   },
-  // getItemsForInventory(knex, inventory_id) {
-  //   return knex
-  //     .select('*')
-  //     .from('minimalist_items')
-  //     .where('minimalist_items.inventory_id', inventory_id)
-  //     .groupBy('minimalist_items.id', 'user.id');
-  // },
 
 };
 module.exports = InventoryService;

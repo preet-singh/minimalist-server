@@ -14,14 +14,6 @@ const serializeInventory = inventory => ({
   user_id: inventory.user_id,
 });
 
-// const serializeInventoryItem = item => ({
-//   id: item.id,
-//   item_name: xss(item.item_name),
-//   item_description: xss(item.item_description),
-//   item_action: xss(item.item_action),
-//   inventory_id: item.inventory_id
-// });
-
 inventoryRouter
   .route('/')
   .get((req, res, next) => {
@@ -108,19 +100,24 @@ inventoryRouter
       .catch(next);
   });
 
-// inventoryRouter
-//   .route('/:inventoryId/items')
-//   .get((req, res, next) => {
-//     InventoryService.getItemsForInventory(
+// async function checkInventoryExists(req, res, next) {
+//   try {
+//     const inventory = await InventoryService.getById(
 //       req.app.get('db'),
 //       req.params.inventory_id
 //     )
-//       .then(items => {
-//         res
-//           .status(201)
-//           .json(items.map(serializeInventoryItem));
+  
+//     if (!inventory)
+//       return res.status(404).json({
+//         error: `Inventory doesn't exist`
 //       })
-//       .catch(next);
-//   });
+  
+//     res.inventory = inventory
+//     next()
+//   } catch (error) {
+//     next(error)
+//   }
+// }
+
   
 module.exports = inventoryRouter;
