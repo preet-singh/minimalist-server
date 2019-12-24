@@ -17,12 +17,13 @@ const InventoryService = {
     return knex.select('*').from('minimalist_inventory').where('id', id).first();
   },
   deleteInventory(knex, id){
-    return knex.select('*').from('minimalist_inventory').where({ id }).delete();
+    return knex.select('*').from('minimalist_inventory').where('id', id).delete();
   },
   updateInventory(knex, id, newInventoryFields) {
     return knex('minimalist_inventory')
-      .where({ id })
+      .where('id', id )
       .update(newInventoryFields);
-  }
+  },
+
 };
 module.exports = InventoryService;

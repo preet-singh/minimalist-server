@@ -21,7 +21,7 @@ const ItemsService = {
   },
   updateItem(knex, id, newItemFields) {
     return knex('minimalist_item')
-      .where({ id })
+      .where('id', id )
       .update(newItemFields);
   }
 };
